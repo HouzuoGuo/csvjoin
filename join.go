@@ -20,7 +20,7 @@ func Join(left, right [][]string, leftCol, rightCol int, trimAndIgnoreCase bool)
 			rightField = strings.TrimSpace(strings.ToLower(rightField))
 		}
 		if val, exists := rightRowVal[rightField]; exists {
-			fmt.Fprintf(os.Stderr, "Value from right file row %d ('%s') overrides previous value ('%s')\n", rightRow, rightField, val)
+			fmt.Fprintf(os.Stderr, "Value from right file row %d ('%s') overrides previous value defined in row %d\n", rightRow, rightField, val)
 		}
 		rightRowVal[rightField] = rightRow
 	}
@@ -40,7 +40,7 @@ func Join(left, right [][]string, leftCol, rightCol int, trimAndIgnoreCase bool)
 		// Look up and concatenate fields
 		rightRow, exists := rightRowVal[leftField]
 		if !exists {
-			fmt.Fprintf(os.Stderr, "Value from left file row %d ('%s') does not join, it is written down as-is.\n ", leftRow, leftField)
+			fmt.Fprintf(os.Stderr, "Value from left file row %d ('%s') does not join, it is written down as-is.\n", leftRow, leftField)
 			result[leftRow] = fields
 			continue
 		}
